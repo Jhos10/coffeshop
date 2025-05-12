@@ -135,6 +135,11 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
 CRISPY_TEMPLATE_PACK = "tailwind"
 
+# Redirect cuando se haya logiado el usuario
 LOGIN_REDIRECT_URL = "list_products"
 
+# Redirect cuando haya cerrado sesion el usuario
 LOGOUT_REDIRECT_URL = "list_products"
+
+# 
+LOGIN_URL = "login_user"

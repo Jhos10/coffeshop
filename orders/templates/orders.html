@@ -1,0 +1,15 @@
+
+
+{{order.user.username}}
+{{order.order_date|date}}
+<ul>
+    {% for product_order in order.orderproduct_set.all %}
+    <li>
+        {{product_order.product.name}}
+        {{product_order.product.price}}
+    </li>
+    {% empty %}
+        <p>No hay items en el order</p>
+    {% endfor %}
+
+</ul>
