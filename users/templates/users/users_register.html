@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="min-h-screen bg-amber-50 flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <!-- Encabezado estilo Sense Coffee -->
+        <div class="bg-amber-900 text-center py-6 px-8 rounded-t-lg">
+            <h1 class="font-serif text-3xl text-amber-50">Bienvenido a Sense Coffee</h1>
+            <p class="text-amber-200 mt-2">Una experiencia sensitiva, donde encontrarás los más deliciosos cafés y postres</p>
+        </div>
+
+        <!-- Formulario de Registro -->
+        <form method="post" class="bg-white p-8 rounded-b-lg shadow-lg">
+            {% csrf_token %}
+            
+            {{ form.non_field_errors }}
+            
+            <!-- Campos del formulario -->
+            {% for field in form %}
+            <div class="mb-6">
+                <label for="{{ field.id_for_label }}" class="block text-amber-900 font-medium mb-2">
+                    {{ field.label }} {% if field.field.required %}<span class="text-amber-600">*</span>{% endif %}
+                </label>
+                {{ field }}
+                {% if field.help_text %}
+                <p class="text-amber-600 text-sm mt-1">{{ field.help_text }}</p>
+                {% endif %}
+                {% for error in field.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            
+            <!-- Checkbox de promociones -->
+            <div class="mb-6 flex items-center">
+                <input type="checkbox" id="promotions" class="rounded text-amber-600 focus:ring-amber-500">
+                <label for="promotions" class="ml-2 text-amber-900">Quiero recibir emails de los anuncios y promociones de este increíble café</label>
+            </div>
+            
+            <!-- Botón de registro -->
+            <button type="submit" class="w-full bg-amber-700 hover:bg-amber-800 text-white py-3 px-4 rounded transition duration-200">
+                Crear cuenta
+            </button>
+            
+            <!-- Enlace a login -->
+            <p class="text-center mt-6 text-amber-900">
+                ¿Ya tienes una cuenta? <a href="{% url 'login_user' %}" class="text-amber-600 hover:underline">Inicia sesión</a>
+            </p>
+            
+            <!-- Términos y condiciones -->
+            <p class="text-xs text-amber-700 mt-6 text-center">
+                Al crear una cuenta, aceptas nuestros términos y condiciones y política de privacidad
+            </p>
+        </form>
+    </div>
+</div>
+
+<!-- Estilos para los inputs -->
+<style>
+    input:not([type="checkbox"]), select, textarea {
+        width: 100%;
+        padding: 0.5rem;
+        border-bottom: 2px solid #d97706;
+        background-color: transparent;
+        color: #78350f;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+        border-bottom-color: #92400e;
+    }
+</style>
+{% endblock %}
